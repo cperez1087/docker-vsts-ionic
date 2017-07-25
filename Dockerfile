@@ -1,29 +1,19 @@
-FROM beevelop/ionic
+FROM microsoft/vsts-agent
 
-RUN apt-get update \
- && apt-get install -y --no-install-recommends \
-        software-properties-common \
- && apt-add-repository ppa:git-core/ppa \
- && apt-get update \
- && apt-get install -y --no-install-recommends \
-        curl \
-        git \
-        jq \
-        libcurl3 \
-        libicu55 \
-        libunwind8 \
- && curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | bash \
- && apt-get install -y --no-install-recommends git-lfs \
- && rm -rf /var/lib/apt/lists/*
+ENV NODEJS_VERSION=8.2.1 \
+    PATH=$PATH:/opt/node/bin
 
-# Accept the TEE EULA
-RUN mkdir -p "/root/.microsoft/Team Foundation/4.0/Configuration/TEE-Mementos" \
- && cd "/root/.microsoft/Team Foundation/4.0/Configuration/TEE-Mementos" \
- && echo '<ProductIdData><eula-14.0 value="true"/></ProductIdData>' > "com.microsoft.tfs.client.productid.xml"
+WORKDIR "/opt/node"
 
-WORKDIR /vsts
+RUN apt-get update && apt-get install -y curl ca-certificates --no-install-recommends && \
+    curl -sL https://nodejs.org/dist/v${NODEJS_VERSION}/node-v${NODEJS_VERSION}-linux-x64.tar.gz | tar xz --strip-components=1 && \
+    rm -rf /var/lib/apt/lists/* && \
+    apt-get clean
 
-COPY ./start.sh .
-RUN chmod +x start.sh
+WORKDIR "/tmp"
 
-CMD ["./start.sh"]
+ENV CORDOVA_VERSION 7.0.1
+RUN npm i -g --unsafe-perm cordova@${CORDOVA_VERSION}
+
+ENV IONIC_VERSION 2.2.1
+RUN npm i -g --unsafe-perm ionic@${IONIC_VERSION}
