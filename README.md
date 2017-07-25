@@ -1,4 +1,4 @@
-[![Pulls](https://shields.beevelop.com/docker/pulls/beevelop/ionic.svg?style=flat-square)](https://links.beevelop.com/d-ionic)
+[![Pulls](https://img.shields.io/docker/pulls/cp1087/vsts-ionic.svg)](https://hub.docker.com/r/cp1087/vsts-ionic/)
 
 # VSTS Agent with Lastest Ionic
 Based on the latest Cordova, Node.js, and Android.
