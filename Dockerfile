@@ -1,8 +1,7 @@
 FROM microsoft/vsts-agent:latest
 
 ENV NODE_VERSION 7.10.0
-RUN curl -sL https://git.io/n-install | bash -s -- -ny - \
- && ~/n/bin/n ${NODE_VERSION} \
+RUN ~/n/bin/n ${NODE_VERSION} \
  && rm -rf ~/n
 
 ENV CORDOVA_VERSION 7.0.1
