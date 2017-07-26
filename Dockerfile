@@ -5,5 +5,6 @@ ENV CORDOVA_VERSION 7.0.1
 RUN npm uninstall -g cordova
 RUN npm i -g cordova@${CORDOVA_VERSION}
 
-#ENV IONIC_VERSION 3.5.0
-#RUN npm i -g --unsafe-perm ionic@${IONIC_VERSION}
+ENV IONIC_VERSION 3.5.0
+RUN npm uninstall -g ionic
+RUN npm i -g ionic@${IONIC_VERSION}
