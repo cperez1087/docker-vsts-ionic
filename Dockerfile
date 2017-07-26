@@ -1,8 +1,8 @@
 FROM microsoft/vsts-agent:latest
 
 ENV NODE_VERSION 7.10.0
-RUN echo ls ~ \
- && echo ls ~/n \
+RUN echo ls -R ~ \
+ && echo ls -R ~/n/bin \
  && n-uninstall \
  && curl -sL https://git.io/n-install | bash -s -- -ny - \
  && ~/n/bin/n ${NODE_VERSION} \
