@@ -1,12 +1,7 @@
 FROM microsoft/vsts-agent:latest
 
 ENV NODE_VERSION 7.10.0
-RUN echo ls -R ~ \
- && echo ls -R ~/n/bin \
- && n-uninstall \
- && curl -sL https://git.io/n-install | bash -s -- -ny - \
- && ~/n/bin/n ${NODE_VERSION} \
- && rm -rf ~/n
+RUN n ${NODE_VERSION}
 
 ENV CORDOVA_VERSION 7.0.1
 RUN npm uninstall -g cordova \
